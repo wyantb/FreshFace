@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = @Resources.Strings.FreshFaceHome;
+    Layout = "~/Views/Shared/_GridLayout.cshtml";
+}
+
+@Html.Partial("_ModalHTMLPartial")
+
+<!-- Start Row -->
+
+<div class="row">
+
+    <div class="three columns hide-on-phones">
+
+        <!-- Calendar -->
+
+        <section class="row">
+            <h4>@Resources.Strings.MyEvents</h4>
+            <div id="calendar" class="calendar"></div>
+        </section>
+
+        <!-- End Calendar -->
+
+    </div>
+
+<!-- News Feed -->
+
+    <section class="six columns">
+        <h2>@Resources.Strings.MyNews</h2>
+        <span class="pagelinks">
+            <input class="status" type="text" placeholder="@Resources.Strings.PostPlaceholder" /> <a class="post" href="">@Resources.Strings.Post</a>
+        </span>
+        <h3>@Resources.Strings.NewsBy<span class="ff ff-name">--</span></h3>
+        <div class="ff-feed-parent normlinks">
+            
+            <!-- Template for feed items:
+            <article class="ff-feed-item">
+                <h6 class="ff-feed-from">Brian Wyant</h6>:
+                <p class="ff-feed-story">
+                    Lots of text!
+                </p>
+            </article>
+            <!-- End Template -->
+
+        </div>
+    </section>
+
+    <!-- End News Feed -->
+
+    <!-- Stock Ticker -->
+
+    <section class="three columns show-on-desktops">
+        <h4>@Resources.Strings.MyStocks</h4>
+        <div>
+
+            <table id="stocks" class="normlinks">
+            <tr>
+                <th>@Resources.Strings.StockName</th><th>@Resources.Strings.StockPrice</th><th>@Resources.Strings.StockChange</th>
+                <th> </th>
+            </tr>
+            </table> 
+            <span class="pagelinks">
+                <a class="addStock" href="#" data-reveal-id="stockModal">@Resources.Strings.AddStock</a>
+            </span>
+        </div>
+    </section>
+
+    <!-- End Stock Ticker -->
+
+</div>
+
+<!-- End Row -->
+
+<div id="fb-root"></div>
+@section fb_init {
+    @RenderPage("~/Views/Shared/_FBLoggedIn.cshtml", 
+        new {
+            fb_ready = "~/Views/Home/_Index_fb_ready.cshtml",
+            fb_onauth = "~/Views/Home/_Index_fb_onauth.cshtml"
+        })
+}

@@ -1,0 +1,16 @@
+FreshFace/build/*
+FreshFace/FreshFace/FreshFace.Publish.xml
+FreshFace/FreshFace/fb_app_id.txt
+FreshFace/FreshFace/obj/*
+FreshFace/FreshFace/bin/*
+FreshFace/FreshFace.Tests/bin/*
+FreshFace/FreshFace.Tests/obj/*
+mvc2-temp/mvc2-temp/obj/*
+mvc3-temp/mvc3-temp/obj/*
+mvc3-temp/mvc3-temp/bin/*
+mvc3-temp/mvc3-temp.Tests/obj/*
+mvc3-temp/mvc3-temp.Tests/bin/*
+*.suo
+*.user
+*.cache
+*/Thumbs.db
