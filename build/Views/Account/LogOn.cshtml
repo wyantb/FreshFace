@@ -1,0 +1,26 @@
+﻿@model FreshFace.Models.LogOnModel
+
+@{
+    ViewBag.Title = @Resources.Strings.LogOn;
+    Layout = "~/Views/Shared/_GridLayout.cshtml";
+}
+
+<div class="row">
+    <div class="twelve columns">
+
+        <h2>Log On</h2>
+        <p>
+            @Resources.Strings.WelcomeMessage
+        </p>
+
+        <div id="fb-root"></div>
+        @section fb_init {
+            @RenderPage("~/Views/Shared/_FBLoggedOut.cshtml")
+        }
+        <div class="fb-login-button" 
+            scope="user_events,friends_events,read_stream,create_event,publish_stream,user_photos,read_friendlists,manage_friendlists">
+            @Resources.Strings.LoginWithFacebook
+        </div>
+
+    </div>
+</div>

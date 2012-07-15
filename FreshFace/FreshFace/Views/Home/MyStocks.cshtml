@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = @Resources.Strings.MyStocks;
+    Layout = "~/Views/Shared/_GridLayout.cshtml";
+}
+
+@Html.Partial("_ModalHTMLPartial")
+
+<script src="http://widgets.FreeStockCharts.com/script/bfcGlobalLib.js" type="text/javascript"></script> 
+<script src="@Url.Content("~/Scripts/FCSChartWidget3.js")" type="text/javascript"></script>
+
+<div id="editModal" class="reveal-modal medium pagelinks">
+     <p>@Resources.Strings.EnterStock</p>
+     <form id="editForm" name="stockForm" action="" method="post">
+        <input type="text" id="esymbol" disabled="disabled" />
+        <input type="text" id="enumShares" class="required" placeholder="@Resources.Strings.NumShares" />
+        <input type="text" id="eprice" class="required" placeholder="@Resources.Strings.BoughtPrice" />
+        <a class="editStocks" href="">@Resources.Strings.EditStock</a>
+    </form> 
+</div>
+
+<!-- Start Row -->
+
+<div class="row">
+    <!-- Stock Ticker -->
+
+    <section class="twelve columns">
+        <h4>@Resources.Strings.MyStocks</h4>
+        <div>
+
+            <table id="stockTable" class="normlinks">
+            <tr>
+                <td>@Resources.Strings.StockName</td><td>@Resources.Strings.CurrentPrice</td><td>@Resources.Strings.TodayChange</td><td>@Resources.Strings.NumShares</td><td>@Resources.Strings.PaidShare</td><td>@Resources.Strings.NetValue</td><td></td>
+                <td> </td>
+            </tr>
+            </table> 
+            <span class="pagelinks">
+                <a class="addStock" href="#" data-reveal-id="stockModal">@Resources.Strings.AddStock</a>
+            </span>
+        </div>
+    </section>
+
+    <!-- End Stock Ticker -->
+</div>
+
+<div class="row" style="height: 500px;">
+    <!-- Stock Information -->
+
+    <section class="twelve columns">
+        <hr >
+        <h4>@Resources.Strings.MoreInformation</h4>
+        <div id='miTitle' style="font-weight:bold;"><p id ='sname'></p></div>
+        <div id='moreInfo1' style="float: left; width:50%;"><p id='lastprice'>@Resources.Strings.LastPrice </p><p id='change'>@Resources.Strings.Change </p><p id ='changeper'>@Resources.Strings.ChangePercent </p><p id='marketcap'>@Resources.Strings.MarketCap </p></div>
+        <div id='moreInfo2' style="float: right; width:50%;"><p id='changeytd'>@Resources.Strings.ChangeYTD </p><p id='high'>@Resources.Strings.High </p><p id ='low'>@Resources.Strings.Low </p><p id='open'>@Resources.Strings.Open </p></div>
+        <div id='bfcHostDiv' style="height: 500px;">
+        <script language=javascript>
+            var chart = new BFCChart("bfcChart", 501, 625, 400);
+            chart.targetElement = 'bfcHostDiv';
+            
+            var split = (window.location + "").split("#");
+            if (split[1]) {
+                chart.changeSymbol(split[1]);
+                FreshFace.makeRequest(split[1]);
+            }
+            chart.createChart();
+            if (split[1]) {
+                chart.addLoadedHandler("this.changeSymbol(\""+split[1]+"\")");
+            }
+            
+            chart.addLoadedHandler("this.showToolBar_set(false)");
+            chart.addLoadedHandler("this.showChangeSymbol_set(false)");
+            
+        </script>
+        </div>
+    </section>
+
+      <!-- End Stock Information -->
+</div>
+
+
+<div id="fb-root"></div>
+@section fb_init {
+    @RenderPage("~/Views/Shared/_FBLoggedIn.cshtml", 
+        new {
+            fb_ready = "~/Views/Home/_MyStocks_fb_ready.cshtml",
+            fb_onauth = "~/Views/Home/_MyStocks_fb_onauth.cshtml"
+        })
+}

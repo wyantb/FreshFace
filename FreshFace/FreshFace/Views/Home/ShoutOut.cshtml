@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = @Resources.Strings.ShoutOut;
+    Layout = "~/Views/Shared/_GridLayout.cshtml";
+}
+
+@Html.Partial("_ModalHTMLPartial")
+
+<style>
+#chat { width: 97%; }
+.them { font-weight: bold; }
+.them:before { content: 'them '; color: #bbb; font-size: 14px; }
+.you { font-style: italic; }
+.you:before { content: 'you '; color: #bbb; font-size: 14px; font-weight: bold; }
+#log {
+  overflow: auto;
+  max-height: 300px;
+  list-style: none;
+  padding: 0;
+/*  margin: 0;*/
+}
+#log li {
+  border-top: 1px solid #ccc;
+  margin: 0;
+  padding: 10px 0;
+}
+</style>
+
+<div class="row">
+    <div class="twelve columns">
+        <article>
+          <form>
+            <input type="text" id="chat" placeholder="@Resources.Strings.TypeForChat" />
+            <input type="text" class="dummy hide" />
+          </form>
+          <p id="status">Not connected</p>
+          <p>Users connected: <span id="connected">0</span></p>
+          <ul id="log"></ul>
+        </article>
+    </div>
+</div>
+
+<div id="fb-root"></div>
+@section fb_init {
+    @RenderPage("~/Views/Shared/_FBLoggedIn.cshtml", 
+        new {
+            fb_ready = "~/Views/Home/_ShoutOut_fb_ready.cshtml",
+            fb_onauth = "~/Views/Home/_ShoutOut_fb_onauth.cshtml"
+        })
+}
+
+
+<script>
+    // let's invite Firefox to the party.
+    if (window.MozWebSocket) {
+        window.WebSocket = window.MozWebSocket;
+    }
+
+    var conn = {};
+    var entities = {
+        '<': '<',
+        '>': '>',
+        '&': '&'
+    };
+
+    var openConnection = function () {
+        Debug.log("Opening Connection");
+
+        // uses global 'conn' object
+        if (conn.readyState === undefined || conn.readyState > 1) {
+            conn = new WebSocket('ws://node.remysharp.com:8001');
+            conn.onopen = function () {
+                Debug.log("Opened!");
+                $("#status").html('Socket open');
+                $("#status").toggleClass('success', true);
+                $("#status").toggleClass('fail', false);
+            };
+
+            conn.onmessage = function (event) {
+                Debug.log("Received message: ");
+                Debug.log(event.data);
+                var message = event.data; //JSON.parse(event.data);
+                if (!(/^\d+$/).test(message)) {
+                    $("#log").prepend('<li class="them">' + message.replace(/[<>&]/g, function (m) { return entities[m]; }) + '</li>');
+                } else {
+                    $("#connected").html(message);
+                }
+            };
+
+            conn.onclose = function (event) {
+                $("#status").html('Socket closed');
+                $("#status").toggleClass('success', false);
+                $("#status").toggleClass('fail', true);
+            };
+        }
+
+        Debug.log("Connection logic setup");
+    };
+
+    if (window.WebSocket === undefined) {
+        $("#status").html('Sockets not supported');
+        $("#status").toggleClass('success', false);
+        $("#status").toggleClass('fail', true);
+    } else {
+
+        var onStatusClick = function (event) {
+            if (conn.readyState !== 1) {
+                conn.close();
+                setTimeout(function () {
+                    openConnection();
+                }, 250);
+            }
+
+        };
+
+        var onChatKey = function (event) {
+            // On enter key
+            if (event.keyCode == 13) {
+                Debug.log("Pressed key: " + event.keyCode);
+                if (event.keyCode == 13) {
+                    Debug.log("Sending message");
+                    event.preventDefault();
+
+                    // if we're connected
+                    if (conn.readyState === 1) {
+                        conn.send(JSON.stringify($("#chat").val()));
+                        $("#log").prepend('<li class="you">' + $("#chat").val().replace(/[<>&]/g, function (m) { return entities[m]; }) + '</li>');
+                        $("#chat").val("");
+                    }
+                }
+            }
+        };
+
+        $(document).ready(function () {
+            $("#status").click(onStatusClick);
+            $("#chat").keyup(onChatKey);
+        });
+
+        openConnection();
+    }
+
+</script>

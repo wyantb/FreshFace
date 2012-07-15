@@ -1,0 +1,298 @@
+/* Foundation v2.2 http://foundation.zurb.com */
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+body 
+{
+    background: url('img/back.png') ;
+}
+
+.main
+{
+    padding-top: 75px;
+}
+
+#zurBar
+{
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    z-index: 1000;
+    margin: 0px;
+    padding: 5px;
+}
+
+.ilblock
+{
+    display: inline-block;
+}
+
+.prof-header
+{
+    width: 35px;
+    height: 35px;
+}
+
+.reveal-modal
+{
+    top: 75px !important;
+}
+
+/* -----------------------------------------
+   Used to verically center links on the top-right side of the header
+----------------------------------------- */
+
+.vcenter
+{
+    margin-top: 15px;
+}
+
+/* -----------------------------------------
+   Format the mabile nav button and dropdown links
+----------------------------------------- */
+
+#mobileNav
+{
+    padding-top: 0px;
+    margin-right: 20px;
+    width: 120px;
+}
+
+/* hide dropdown links */
+#mobileNav ul
+{
+    display: none;
+}
+
+/* display dropdown links */
+#mobileNav li:hover ul
+{
+    display: block;
+}
+
+#mobileNav ul a
+{
+    padding: 8px 5px 8px 5px;
+    border-right: 1px solid #00A5FF;
+    border-bottom: 1px solid #00A5FF;
+    border-left: 1px solid #00A5FF;
+    display: block;
+    background-color: #222222;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+#mobileNav ul a:link
+{
+}
+
+#mobileNav ul a:visited
+{
+}
+
+#mobileNav ul a:active
+{
+}
+
+#mobileNav ul a:hover
+{
+    background-color: #2E2E2E;
+    text-decoration: underline;
+}
+
+/* -----------------------------------------
+   Stocks link
+----------------------------------------- */
+
+.addStock
+{
+    margin-left: 2px;
+    margin-top: 2px;
+}
+
+/* -----------------------------------------
+   Links on the main part of the page
+----------------------------------------- */
+
+.pagelinks a
+{
+    display: inline-block;
+    padding: 3px 10px 3px 10px;
+    width: inherit;
+    text-decoration: none;
+    border: 1px solid #DCDCDC;
+    border-radius: 3px;
+    box-shadow: 0px 0px 2px 0px #444444;
+    color: #444444;
+    background-color: #F2F2F2;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.pagelinks a:link
+{
+}
+
+.pagelinks a:visited
+{
+}
+
+.pagelinks a:active
+{
+}
+
+.pagelinks a:hover
+{
+    text-decoration: underline;
+    padding: 2px 9px 2px 9px;
+    border: 2px solid #CCCCCC;
+    color: #333333;
+    background-color: #E5E5E5;
+}
+
+/* -----------------------------------------
+   Links in the header
+----------------------------------------- */
+
+.navlinks a
+{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navlinks a:link
+{
+}
+
+.navlinks a:visited
+{
+}
+
+.navlinks a:active
+{
+}
+
+.navlinks a:hover
+{
+    text-decoration: underline;
+}
+
+/* -----------------------------------------
+   Links in the news feed
+----------------------------------------- */
+
+.normlinks a p
+{
+    color: inherit;
+}
+
+.normlinks a h1
+{
+    color: inherit;
+}
+
+.normlinks a h2
+{
+    color: inherit;
+}
+
+.normlinks a h3
+{
+    color: inherit;
+}
+
+.normlinks a h4
+{
+    color: inherit;
+}
+
+.normlinks a h5
+{
+    color: inherit;
+}
+
+.normlinks a h6
+{
+    color: inherit;
+}
+
+.normlinks a
+{
+    color: #3366CC !important;
+    text-decoration: none;
+}
+
+.normlinks a:link
+{
+}
+
+.normlinks a:visited
+{
+}
+
+.normlinks a:active
+{
+}
+
+.normlinks a:hover
+{
+    text-decoration: underline;
+}
+
+/* -----------------------------------------
+   Format the avatar and logo
+----------------------------------------- */
+
+.logo
+{
+    float: left;
+}
+
+.logo table
+{
+    background-color: inherit;
+    text-align: center;
+    vertical-align: middle;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+.logo tr
+{
+    background-color: transparent;
+    text-align: center;
+    vertical-align: middle;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.logo td
+{
+    background-color: transparent;
+    text-align: center;
+    vertical-align: middle;
+    border: 0;
+    padding: 3px;
+    margin: 0;
+}
+
+.logo img
+{
+    border: 1px solid #FFFFFF;
+    padding: 0;
+    margin: 0;
+}
